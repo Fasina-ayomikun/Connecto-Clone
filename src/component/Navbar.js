@@ -16,7 +16,7 @@ function Navbar({ fixed }) {
         <div className='nav-contents'>
           <ul className='nav-links'>
             <li className='nav-link'>
-              <NavLink to='/destination' activeclassname='active-nav'>
+              <NavLink to='/destinations' activeclassname='active-nav'>
                 Destinations
               </NavLink>
             </li>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import image from "../images/hero.jpeg";
 function Adventure() {
   return (
-    <section className='adventure-section'>
+    <section className='adventure-section container'>
       <h2>get inspired for your next adventure</h2>
       <h4>explore the world of connecto stories</h4>
       <div className='adventures'>

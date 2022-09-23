@@ -6,7 +6,7 @@ import Video from "./Video";
 function Booking() {
   return (
     <>
-      <div className='booking-process'>
+      <div className='booking-process container'>
         <h2>simple booking process</h2>
         <h4>a service designed with simplicity in Mind</h4>
         <div className='bookings'>

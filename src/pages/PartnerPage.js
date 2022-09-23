@@ -227,9 +227,7 @@ const Wrapper = styled.section`
     margin: 30px 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
     justify-content: center;
-
     column-gap: 30px;
   }
   .why {

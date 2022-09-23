@@ -7,16 +7,16 @@ import Hero from "../component/Hero";
 import HomeDestinations from "../component/HomeDestinations";
 import Tripad from "../component/Tripad";
 
-function Home() {
+function AirportPage() {
   return (
     <>
       <Hero form={true} />
       <Tripad />
-      <HomeDestinations main={true} />
-
+      <AirportInfo />
+      <Booking />
       <Footer />
     </>
   );
 }
 
-export default Home;
+export default AirportPage;

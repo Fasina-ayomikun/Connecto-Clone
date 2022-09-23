@@ -1,5 +1,6 @@
 import React from "react";
 import { FaChevronRight, FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import image from "../images/destination.jpeg";
 function SingleDestination() {
@@ -7,7 +8,7 @@ function SingleDestination() {
     <Wrapper>
       <div className='img-container'>
         <div className='img-gradient'>
-          <h5>View destination</h5>
+          <Link to='/airport'>View destination</Link>
           <FaChevronRight />
         </div>
         <img src={image} alt='' />

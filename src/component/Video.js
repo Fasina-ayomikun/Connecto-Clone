@@ -4,8 +4,8 @@ import image from "../images/hero.jpeg";
 import Adventure from "./Adventure";
 function Video() {
   return (
-    <>
-      <section className='video-section'>
+    <section className='container'>
+      <div className='video-section'>
         <img src={image} alt='' />
         <div className='video-info'>
           <div>
@@ -15,9 +15,9 @@ function Video() {
           </div>
           <FaRegPlayCircle />
         </div>
-      </section>
+      </div>
       <Adventure />
-    </>
+    </section>
   );
 }
 
