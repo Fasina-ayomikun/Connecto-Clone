@@ -151,7 +151,18 @@ const Wrapper = styled.section`
     padding: 0 30px;
     margin-bottom: 60px;
   }
+  .faq-categories {
+    margin: 0 auto;
+    max-width: var(--max-width);
+    padding: 25px 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
 
+    background-color: #fff;
+    border-radius: 30px;
+    column-gap: 30px;
+  }
   .faq-categories > div {
     display: flex;
     align-items: center;

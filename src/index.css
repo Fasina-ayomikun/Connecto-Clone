@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Open Sans", sans-serif;
+  overflow-x: hidden;
 }
 ul {
   list-style: none;
@@ -243,6 +244,35 @@ img {
   color: var(--gradient-blue);
   margin: 5px 0;
 }
+.container h2,
+.container h4 {
+  text-transform: capitalize;
+  text-align: center;
+}
+.container h2 {
+  font-size: 2.5rem;
+  color: #1a1919;
+  font-weight: 900;
+}
+.container h4 {
+  color: #555;
+  margin-top: 0;
+}
+.container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 8px;
+  border: 0;
+  margin: 50px auto;
+  background-color: var(--border-color);
+}
+button a {
+  color: #fff;
+  text-transform: capitalize;
+}
+
 /* Booking */
 .booking-process {
   margin-top: 100px;
