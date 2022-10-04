@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AboutPage from "./pages/AboutPage";
 import DestinationsPage from "./pages/DestinationsPage";
 import FAQ from "./pages/FAQ";
@@ -8,7 +8,6 @@ import AirportPage from "./pages/AirportPage";
 import SingleTransport from "./pages/SingleTransport";
 function App() {
   return (
-    <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='destinations' element={<DestinationsPage />}></Route>
@@ -20,7 +19,6 @@ function App() {
         <Route path='airport' element={<AirportPage />}></Route>
         <Route path='transport' element={<SingleTransport />}></Route>
       </Routes>
-    </BrowserRouter>
   );
 }
 export default App;
