@@ -7,7 +7,8 @@ import { FaRegUser } from "react-icons/fa";
 import styled from "styled-components";
 import { useState } from "react";
 function Book() {
-  const [typing, setTyping] = useState(false);
+  const [typingFrom, setTypingFrom] = useState(false);
+  const [typingTo, setTypingTo] = useState(false);
   return (
     <Wrapper>
       <section className='book-section'>
@@ -21,11 +22,16 @@ function Book() {
                 type='text'
                 className='from'
                 placeholder='from'
-                onKeyUp={() => setTyping(true)}
+                onKeyUp={() => {
+                  setTypingFrom(true);
+                  setTypingTo(false);
+                }}
               />
               <ul
-                className={`${typing ? "options show-option " : "options "}`}
-                onClick={() => setTyping(false)}
+                className={`${
+                  typingFrom ? "options show-option " : "options "
+                }`}
+                onClick={() => setTypingFrom(false)}
               >
                 <li className='option'>
                   {" "}
@@ -52,7 +58,46 @@ function Book() {
             <TbArrowsRightLeft />
             <div className='from-cont'>
               <MdLocationPin />
-              <input type='text' className='to' placeholder='to' />
+              <input
+                type='text'
+                className='to'
+                placeholder='to'
+                onKeyUp={() => {
+                  setTypingTo(true);
+                  setTypingFrom(false);
+                }}
+              />
+              <ul
+                className={`${
+                  typingTo
+                    ? "options optionTo  show-option "
+                    : "options optionTo "
+                }`}
+                onClick={() => {
+                  setTypingTo(false);
+                }}
+              >
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+              </ul>
             </div>
             <div className='departure-cont'>
               <div className='from-cont'>
@@ -210,6 +255,9 @@ const Wrapper = styled.section`
     font-size: 1rem;
     display: flex;
     align-items: center;
+  }
+  .optionTo {
+    left: unset;
   }
   .option:hover {
     background-color: #175af5;
