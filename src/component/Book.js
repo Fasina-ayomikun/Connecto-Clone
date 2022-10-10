@@ -5,7 +5,9 @@ import { VscCalendar } from "react-icons/vsc";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 import styled from "styled-components";
+import { useState } from "react";
 function Book() {
+  const [typing, setTyping] = useState(false);
   return (
     <Wrapper>
       <section className='book-section'>
@@ -15,7 +17,37 @@ function Book() {
           <form className='book-form'>
             <div className='from-cont'>
               <MdLocationPin />
-              <input type='text' className='from' placeholder='from' />
+              <input
+                type='text'
+                className='from'
+                placeholder='from'
+                onKeyUp={() => setTyping(true)}
+              />
+              <ul
+                className={`${typing ? "options show-option " : "options "}`}
+                onClick={() => setTyping(false)}
+              >
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+                <li className='option'>
+                  {" "}
+                  <MdLocationPin /> Portugal
+                </li>
+              </ul>
             </div>
             <TbArrowsRightLeft />
             <div className='from-cont'>
@@ -58,9 +90,7 @@ const Wrapper = styled.section`
     position: relative;
   }
   .book-container {
-    /* position: absolute;
-    top: -100px;
-    left: 10%; */
+    position: relative;
     margin: 0 auto;
     max-width: var(--max-width);
   }
@@ -162,6 +192,31 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: space-between;
     column-gap: 30px;
+  }
+  .options {
+    position: absolute;
+    /* bottom: 0; */
+    top: 100px;
+    left: 15px;
+    width: 50%;
+
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    display: none;
+  }
+  .option {
+    padding: 10px 15px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  .option:hover {
+    background-color: #175af5;
+    transition: 0.1s ease-in;
+  }
+  .show-option {
+    display: block;
   }
   @media (max-width: 937px) {
     .departure-cont {
