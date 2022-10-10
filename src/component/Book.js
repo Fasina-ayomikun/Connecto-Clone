@@ -6,9 +6,45 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 import styled from "styled-components";
 import { useState } from "react";
+import { useGetPlacesQuery } from '../services/transportApi'
+
 function Book() {
   const [typingFrom, setTypingFrom] = useState(false);
   const [typingTo, setTypingTo] = useState(false);
+<<<<<<< HEAD
+=======
+  const [ fromPlaceEntry, setFromPlaceEntry ] = useState("")
+  const [ toPlaceEntry, setToPlaceEntry ] = useState("")
+  const { data: places, isFetching } = useGetPlacesQuery();
+
+  const handlePlaceEntry = (e) => {
+    var val = e.target.value
+    
+    if(e.target.name === "to"){
+      setTypingTo(true);
+      setTypingFrom(false); 
+      setToPlaceEntry(val)
+    }else if(e.target.name === "from"){
+      setTypingFrom(true);
+      setTypingTo(false);
+      setFromPlaceEntry(val)
+    }
+    
+  }
+
+  const handleFromPlaceState = (e) => {
+    var value = e.target.outerText
+    setFromPlaceEntry(value)
+  }
+
+  const handleToPlaceState = (e) => {
+    var value = e.target.outerText
+    setToPlaceEntry(value)
+  }
+
+  if (isFetching) return "..."
+
+>>>>>>> ed8d53b6be5bfc8119c6421c307703456a051da6
   return (
     <Wrapper>
       <section className='book-section'>
@@ -19,46 +55,44 @@ function Book() {
             <div className='from-cont'>
               <MdLocationPin />
               <input
+                name="from"
                 type='text'
+                value={fromPlaceEntry}
                 className='from'
                 placeholder='from'
+<<<<<<< HEAD
                 onKeyUp={() => {
                   setTypingFrom(true);
                   setTypingTo(false);
                 }}
               />
               <ul
+=======
+                onChange={handlePlaceEntry}
+              />
+              {(fromPlaceEntry.length > 0 && typingFrom == true) && (
+                <ul
+>>>>>>> ed8d53b6be5bfc8119c6421c307703456a051da6
                 className={`${
                   typingFrom ? "options show-option " : "options "
                 }`}
                 onClick={() => setTypingFrom(false)}
               >
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
+                {places.filter((place) => (place.name.toLowerCase().startsWith(fromPlaceEntry.toLowerCase()))).slice(0, 9).map((place, index) => (
+                  <li key={index} className='option' onClick={handleFromPlaceState}>
+                    <MdLocationPin /> {place.name}
+                  </li>
+                ))}
+                
               </ul>
+              )}
+              
             </div>
             <TbArrowsRightLeft />
             <div className='from-cont'>
               <MdLocationPin />
               <input
+<<<<<<< HEAD
                 type='text'
                 className='to'
                 placeholder='to'
@@ -68,6 +102,17 @@ function Book() {
                 }}
               />
               <ul
+=======
+                name="to"
+                type='text'
+                value={toPlaceEntry}
+                className='to'
+                placeholder='to'
+                onChange={handlePlaceEntry}
+              />
+              {(toPlaceEntry.length > 0 && typingTo == true) && (
+                <ul
+>>>>>>> ed8d53b6be5bfc8119c6421c307703456a051da6
                 className={`${
                   typingTo
                     ? "options optionTo  show-option "
@@ -77,6 +122,7 @@ function Book() {
                   setTypingTo(false);
                 }}
               >
+<<<<<<< HEAD
                 <li className='option'>
                   {" "}
                   <MdLocationPin /> Portugal
@@ -98,6 +144,16 @@ function Book() {
                   <MdLocationPin /> Portugal
                 </li>
               </ul>
+=======
+                {places.filter((place) => (place.name.toLowerCase().startsWith(toPlaceEntry.toLowerCase()))).slice(0, 9).map((place, index) => (
+                  <li key={index} className='option' onClick={handleToPlaceState}>
+                    <MdLocationPin /> {place.name}
+                  </li>
+                ))}
+                
+              </ul>
+              )}
+>>>>>>> ed8d53b6be5bfc8119c6421c307703456a051da6
             </div>
             <div className='departure-cont'>
               <div className='from-cont'>
