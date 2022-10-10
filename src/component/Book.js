@@ -6,8 +6,42 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 import styled from "styled-components";
 import { useState } from "react";
+import { useGetPlacesQuery } from '../services/transportApi'
+
 function Book() {
-  const [typing, setTyping] = useState(false);
+  const [typingFrom, setTypingFrom] = useState(false);
+  const [typingTo, setTypingTo] = useState(false);
+  const [ fromPlaceEntry, setFromPlaceEntry ] = useState("")
+  const [ toPlaceEntry, setToPlaceEntry ] = useState("")
+  const { data: places, isFetching } = useGetPlacesQuery();
+
+  const handlePlaceEntry = (e) => {
+    var val = e.target.value
+    
+    if(e.target.name === "to"){
+      setTypingTo(true);
+      setTypingFrom(false); 
+      setToPlaceEntry(val)
+    }else if(e.target.name === "from"){
+      setTypingFrom(true);
+      setTypingTo(false);
+      setFromPlaceEntry(val)
+    }
+    
+  }
+
+  const handleFromPlaceState = (e) => {
+    var value = e.target.outerText
+    setFromPlaceEntry(value)
+  }
+
+  const handleToPlaceState = (e) => {
+    var value = e.target.outerText
+    setToPlaceEntry(value)
+  }
+
+  if (isFetching) return "..."
+
   return (
     <Wrapper>
       <section className='book-section'>
@@ -18,41 +52,60 @@ function Book() {
             <div className='from-cont'>
               <MdLocationPin />
               <input
+                name="from"
                 type='text'
+                value={fromPlaceEntry}
                 className='from'
                 placeholder='from'
-                onKeyUp={() => setTyping(true)}
+                onChange={handlePlaceEntry}
               />
-              <ul
-                className={`${typing ? "options show-option " : "options "}`}
-                onClick={() => setTyping(false)}
+              {(fromPlaceEntry.length > 0 && typingFrom == true) && (
+                <ul
+                className={`${
+                  typingFrom ? "options show-option " : "options "
+                }`}
+                onClick={() => setTypingFrom(false)}
               >
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
-                <li className='option'>
-                  {" "}
-                  <MdLocationPin /> Portugal
-                </li>
+                {places.filter((place) => (place.name.toLowerCase().startsWith(fromPlaceEntry.toLowerCase()))).slice(0, 9).map((place, index) => (
+                  <li key={index} className='option' onClick={handleFromPlaceState}>
+                    <MdLocationPin /> {place.name}
+                  </li>
+                ))}
+                
               </ul>
+              )}
+              
             </div>
             <TbArrowsRightLeft />
             <div className='from-cont'>
               <MdLocationPin />
-              <input type='text' className='to' placeholder='to' />
+              <input
+                name="to"
+                type='text'
+                value={toPlaceEntry}
+                className='to'
+                placeholder='to'
+                onChange={handlePlaceEntry}
+              />
+              {(toPlaceEntry.length > 0 && typingTo == true) && (
+                <ul
+                className={`${
+                  typingTo
+                    ? "options optionTo  show-option "
+                    : "options optionTo "
+                }`}
+                onClick={() => {
+                  setTypingTo(false);
+                }}
+              >
+                {places.filter((place) => (place.name.toLowerCase().startsWith(toPlaceEntry.toLowerCase()))).slice(0, 9).map((place, index) => (
+                  <li key={index} className='option' onClick={handleToPlaceState}>
+                    <MdLocationPin /> {place.name}
+                  </li>
+                ))}
+                
+              </ul>
+              )}
             </div>
             <div className='departure-cont'>
               <div className='from-cont'>
@@ -210,6 +263,9 @@ const Wrapper = styled.section`
     font-size: 1rem;
     display: flex;
     align-items: center;
+  }
+  .optionTo {
+    left: unset;
   }
   .option:hover {
     background-color: #175af5;
